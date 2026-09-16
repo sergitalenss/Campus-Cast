@@ -21,7 +21,7 @@ import '../styles/global.css';
       <p class="text-lg sm:text-xl md:text-2xl text-neutral-400 max-w-3xl mx-auto mb-8 font-light px-4">
         Infraestructura deportiva inteligente para el campus de Gandía. <br> Construida con residuo electrónico de la UPV.
       </p>
-      <a href="#unete" class="bg-white text-black px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform duration-300">
+      <a id="apply-btn" href="#unete" class="bg-white text-black px-8 py-4 rounded-full font-bold hover:scale-105 transition-transform duration-300">
         Aplicar al equipo
       </a>
     </section>
@@ -71,8 +71,9 @@ import '../styles/global.css';
     <script>
       import { gsap } from "gsap";
       import { ScrollTrigger } from "gsap/ScrollTrigger";
+      import { ScrollToPlugin } from "gsap/ScrollToPlugin";
       
-      gsap.registerPlugin(ScrollTrigger);
+      gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
       const video = document.getElementById("tech-video");
       
@@ -104,6 +105,19 @@ import '../styles/global.css';
         .to("#text-2", { opacity: 0, y: -50, duration: 1 }, "+=1")
         .to("#text-3", { opacity: 1, y: 0, duration: 1 })
         .to("#text-3", { opacity: 0, y: -50, duration: 1 }, "+=2");
+
+      // SCROLL LENTO AL PULSAR "Aplicar al equipo"
+      const applyBtn = document.getElementById("apply-btn");
+      const target = document.getElementById("unete");
+
+      applyBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        gsap.to(window, {
+          duration: 4.5,
+          scrollTo: { y: target, offsetY: 0 },
+          ease: "power1.inOut"
+        });
+      });
     </script>
   </body>
 </html>
